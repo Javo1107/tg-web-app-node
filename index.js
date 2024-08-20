@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 const token = '6586183439:AAHx-0XIJrnXWDX7sUerD-jfhroSVjGiP-k';
-const webAppUrl = 'https://evos-test.netlify.app/';
+const webAppUrl = 'https://evos-test.netlify.app';
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
