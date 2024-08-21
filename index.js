@@ -9,7 +9,11 @@ const bot = new TelegramBot(token, {polling: true});
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: webAppUrl,
+    methods: ['POST'],
+    credentials: true
+}));
 
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
@@ -52,7 +56,9 @@ bot.on('message', async (msg) => {
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products = [], totalPrice} = req.body;
+    console.log("hey its me");
     try {
+        console.log("hey its me in try");
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
@@ -63,6 +69,7 @@ app.post('/web-data', async (req, res) => {
         })
         return res.status(200).json({});
     } catch (e) {
+        console.log(e)
         return res.status(500).json({})
     }
 })
