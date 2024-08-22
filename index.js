@@ -6,7 +6,7 @@ const https = require('https');
 const fs = require('fs');
 
 const token = '6586183439:AAHx-0XIJrnXWDX7sUerD-jfhroSVjGiP-k';
-const webAppUrl = 'https://evos-test.netlify.app';
+const webAppUrl = 'https://b379-93-188-83-203.ngrok-free.app';
 
 const options = {
     key: fs.readFileSync('/etc/ssl/private/server.key'),
