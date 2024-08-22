@@ -23,7 +23,7 @@ app.use(cors({
     credentials: true
 }));
 
-https.createServer(options, app).listen(443, () => {
+https.createServer(options, app).listen(8000, () => {
     console.log(`Server running on https://<your-public-ip>`);
 });
 
