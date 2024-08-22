@@ -2,8 +2,16 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
 
+const https = require('https');
+const fs = require('fs');
+
 const token = '6586183439:AAHx-0XIJrnXWDX7sUerD-jfhroSVjGiP-k';
 const webAppUrl = 'https://evos-test.netlify.app';
+
+const options = {
+    key: fs.readFileSync('/etc/ssl/private/server.key'),
+    cert: fs.readFileSync('/etc/ssl/certs/server.cert')
+};
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
@@ -14,6 +22,10 @@ app.use(cors({
     methods: ['POST'],
     credentials: true
 }));
+
+https.createServer(options, app).listen(8000, () => {
+    console.log(`Server running on https://<your-public-ip>`);
+});
 
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
@@ -73,6 +85,6 @@ app.post('/web-data', async (req, res) => {
     }
 })
 
-const PORT = 8000;
+// const PORT = 8000;
 
-app.listen(PORT, () => console.log('server started on PORT ' + PORT))
+// app.listen(PORT, () => console.log('server started on PORT ' + PORT))
